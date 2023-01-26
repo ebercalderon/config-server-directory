@@ -1,6 +1,3 @@
-customer:
-  property: Customer Profile Dev
-
 server:
   port: ${PORT:${SERVER_PORT:0}}
 
