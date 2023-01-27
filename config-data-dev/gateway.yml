@@ -26,10 +26,10 @@ spring:
           uri: lb://movement
           predicates:
             - Path=/movement/**
-        - id: passive-service
-          uri: lb://passive
+        - id: currentAccount
+          uri: lb://currentAccount
           predicates:
-            - Path=/passive/**
+            - Path=/currentAccount/**
         - id: credit
           uri: lb://credit
           predicates:
