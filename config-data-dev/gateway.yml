@@ -18,18 +18,6 @@ spring:
         locator:
           enabled: true
       routes:
-        - id: bankaccount
-          uri: lb://bankaccount
-          predicates:
-            - Path=/accounts/**
-        - id: credit
-          uri: lb://credit
-          predicates:
-            - Path=/credits/**
-        - id: statusaccount
-          uri: lb://statusaccount
-          predicates:
-            - Path=/status/**
         - id: customer
           uri: lb://customer
           predicates:
@@ -38,3 +26,15 @@ spring:
           uri: lb://movement
           predicates:
             - Path=/movement/**
+        - id: passive-service
+          uri: lb://passive
+          predicates:
+            - Path=/passive/**
+        - id: credit
+          uri: lb://credit
+          predicates:
+            - Path=/credits/**
+        - id: statusaccount
+          uri: lb://statusaccount
+          predicates:
+            - Path=/status/**
