@@ -5,6 +5,12 @@ spring:
   data:
     mongodb:
       uri: mongodb+srv://dev:az9Y7tr5eGTgHzVF@nttdata.tipkdvn.mongodb.net/bootcamp?retryWrites=true&w=majority
+  cloud:
+    config:
+      server:
+        git:
+          default-label: main
+          uri: https://github.com/ecalderc/movement-microservice
   application:
     name: movement
 
