@@ -12,6 +12,8 @@ eureka:
     prefer-ip-address: true
     
 spring:
+  application:
+    name: gateway
   cloud:
     config:
       server:

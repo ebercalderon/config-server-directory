@@ -16,9 +16,10 @@ spring:
     name: gateway
   cloud:
     config:
-      enabled: true
-      label: main
-      uri: http://host.docker.internal:8888
+      server:
+        git:
+          default-label: main
+          uri: https://github.com/ecalderc/gateway
     gateway:
       discovery:
         locator:

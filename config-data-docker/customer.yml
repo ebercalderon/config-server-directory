@@ -9,9 +9,10 @@ spring:
       uri: mongodb+srv://dev:az9Y7tr5eGTgHzVF@nttdata.tipkdvn.mongodb.net/bootcamp?retryWrites=true&w=majority
   cloud:
     config:
-      enabled: true
-      label: main
-      uri: http://host.docker.internal:8888
+      server:
+        git:
+          default-label: main
+          uri: https://github.com/ecalderc/customer-microservice
 
 eureka:
   instance:
