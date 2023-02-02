@@ -19,7 +19,7 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
     service-url:
-      defaultZone: https://eureka-ecalderc.azurewebsites.net/eureka
+      defaultZone: https://eureka-server-ecalderc.azurewebsites.net/eureka
     prefer-ip-address: true
 
 resilience4j.circuitbreaker:
