@@ -15,8 +15,6 @@ spring:
           uri: https://github.com/ecalderc/passive-microservice
 
 eureka:
-  instance:
-    hostname: localhost
   client:
     fetch-registry: true
     register-with-eureka: true
