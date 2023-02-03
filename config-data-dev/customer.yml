@@ -38,5 +38,3 @@ resilience4j.circuitbreaker:
       waitDurationInOpenState: 3s
       failureRateThreshold: 50
       eventConsumerBufferSize: 10
-
-state: active

@@ -1,0 +1,94 @@
+version: '3'
+
+services:
+
+  config-server:
+    container_name: config-server
+    build:
+        context: ../config-server
+    image: config-server
+    ports:
+      - "8888:8888"
+    networks:
+      bootcamp:
+        aliases:
+          - config-server
+
+  eureka-server:
+    container_name: eureka-server
+    build:
+        context: ../eureka-server
+    image: eureka-server
+    environment:
+      - spring.cloud.config.uri= http://config-server:8888
+    depends_on:
+      - config-server
+    ports:
+      - "8761:8761"
+    networks:
+      - bootcamp
+
+  gateway:
+    container_name: gateway
+    build:
+        context: ../gateway
+    image: gateway
+    environment:
+      - spring.cloud.config.uri= http://config-server:8888
+      - eureka.client.serviceUrl.defaultZone=http://config-server:8761/eureka
+    depends_on:
+      - eureka-server
+      - gateway
+    ports:
+      - "9000:9000"
+    networks:
+      - bootcamp
+
+  customer-microservice:
+    container_name: customer-microservice
+    build:
+        context: ../customer-microservice
+    image: customer-microservice
+    environment:
+      - spring.cloud.config.uri= http://config-server:8888
+      - eureka.client.serviceUrl.defaultZone=http://config-server:8761/eureka
+    depends_on:
+      - eureka-server
+      - gateway
+    networks:
+      - bootcamp
+    links:
+      - eureka-server
+
+  movement-microservice:
+    container_name: movement-microservice
+    build:
+        context: ../movement-microservice
+    image: movement-microservice
+    environment:
+      - spring.cloud.config.uri= http://config-server:8888
+      - eureka.client.serviceUrl.defaultZone=http://config-server:8761/eureka
+    depends_on:
+      - eureka-server
+      - gateway
+    networks:
+      - bootcamp
+
+  passive-microservice:
+    container_name: passive-microservice
+    build:
+        context: ../passive-microservice
+    image: passive-microservice
+    environment:
+      - spring.cloud.config.uri= http://config-server:8888
+      - eureka.client.serviceUrl.defaultZone=http://config-server:8761/eureka
+    depends_on:
+      - eureka-server
+      - gateway
+    networks:
+      - bootcamp
+
+networks:
+  bootcamp:
+      driver: bridge
+
