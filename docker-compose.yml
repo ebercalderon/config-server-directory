@@ -20,9 +20,11 @@ services:
         context: ../eureka-server
     image: eureka-server
     environment:
+      - spring.cloud.config.profile= docker
       - spring.cloud.config.uri= http://config-server:8888
     depends_on:
-      - config-server
+      config-server:
+        condition: service_started
     ports:
       - "8761:8761"
     networks:
@@ -34,11 +36,12 @@ services:
         context: ../gateway
     image: gateway
     environment:
+      - spring.cloud.config.profile= docker
       - spring.cloud.config.uri= http://config-server:8888
       - eureka.client.serviceUrl.defaultZone=http://config-server:8761/eureka
     depends_on:
-      - eureka-server
-      - gateway
+      eureka-server:
+        condition: service_started
     ports:
       - "9000:9000"
     networks:
@@ -50,11 +53,14 @@ services:
         context: ../customer-microservice
     image: customer-microservice
     environment:
+      - spring.cloud.config.profile= docker
       - spring.cloud.config.uri= http://config-server:8888
       - eureka.client.serviceUrl.defaultZone=http://config-server:8761/eureka
     depends_on:
-      - eureka-server
-      - gateway
+      eureka-server:
+        condition: service_started
+      gateway:
+        condition: service_started
     networks:
       - bootcamp
     links:
@@ -66,11 +72,14 @@ services:
         context: ../movement-microservice
     image: movement-microservice
     environment:
+      - spring.cloud.config.profile= docker
       - spring.cloud.config.uri= http://config-server:8888
       - eureka.client.serviceUrl.defaultZone=http://config-server:8761/eureka
     depends_on:
-      - eureka-server
-      - gateway
+      eureka-server:
+        condition: service_started
+      gateway:
+        condition: service_started
     networks:
       - bootcamp
 
@@ -80,15 +89,17 @@ services:
         context: ../passive-microservice
     image: passive-microservice
     environment:
+      - spring.cloud.config.profile= docker
       - spring.cloud.config.uri= http://config-server:8888
       - eureka.client.serviceUrl.defaultZone=http://config-server:8761/eureka
     depends_on:
-      - eureka-server
-      - gateway
+      eureka-server:
+        condition: service_started
+      gateway:
+        condition: service_started
     networks:
       - bootcamp
 
 networks:
   bootcamp:
       driver: bridge
-
