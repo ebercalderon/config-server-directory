@@ -15,9 +15,7 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      bootcamp:
-        aliases:
-          - config-server
+      - bootcamp
 
   eureka-server:
     container_name: eureka-server
@@ -25,13 +23,18 @@ services:
         context: ../eureka-server
     image: eureka-server
     environment:
-      - spring.profiles.active= docker
+      - spring.profiles.active= dev
       - spring.cloud.config.uri= http://config-server:8888
     depends_on:
       config-server:
         condition: service_healthy
     ports:
       - "8761:8761"
+    healthcheck:
+      test: curl -f http://eureka-server:8761/actuator/health || exit 1
+      interval: 5s
+      timeout: 5s
+      retries: 5
     networks:
       - bootcamp
 
@@ -41,12 +44,12 @@ services:
         context: ../gateway
     image: gateway
     environment:
-      - spring.profiles.active= docker
+      - spring.profiles.active= dev
       - spring.cloud.config.uri= http://config-server:8888
       - eureka.client.serviceUrl.defaultZone=http://config-server:8761/eureka
     depends_on:
       eureka-server:
-        condition: service_started
+        condition: service_healthy
     ports:
       - "9000:9000"
     networks:
@@ -58,18 +61,16 @@ services:
         context: ../customer-microservice
     image: customer-microservice
     environment:
-      - spring.profiles.active= docker
+      - spring.profiles.active= dev
       - spring.cloud.config.uri= http://config-server:8888
       - eureka.client.serviceUrl.defaultZone=http://config-server:8761/eureka
     depends_on:
       eureka-server:
-        condition: service_started
+        condition: service_healthy
       gateway:
         condition: service_started
     networks:
       - bootcamp
-    links:
-      - eureka-server
 
   movement-microservice:
     container_name: movement-microservice
@@ -77,12 +78,12 @@ services:
         context: ../movement-microservice
     image: movement-microservice
     environment:
-      - spring.profiles.active= docker
+      - spring.profiles.active= dev
       - spring.cloud.config.uri= http://config-server:8888
       - eureka.client.serviceUrl.defaultZone=http://config-server:8761/eureka
     depends_on:
       eureka-server:
-        condition: service_started
+        condition: service_healthy
       gateway:
         condition: service_started
     networks:
@@ -94,12 +95,12 @@ services:
         context: ../passive-microservice
     image: passive-microservice
     environment:
-      - spring.profiles.active= docker
+      - spring.profiles.active= dev
       - spring.cloud.config.uri= http://config-server:8888
       - eureka.client.serviceUrl.defaultZone=http://config-server:8761/eureka
     depends_on:
       eureka-server:
-        condition: service_started
+        condition: service_healthy
       gateway:
         condition: service_started
     networks:
