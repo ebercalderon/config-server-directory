@@ -9,6 +9,11 @@ services:
     image: config-server
     ports:
       - "8888:8888"
+    healthcheck:
+      test: curl -f http://config-server:8888/actuator/health || exit 1
+      interval: 5s
+      timeout: 5s
+      retries: 5
     networks:
       bootcamp:
         aliases:
@@ -24,7 +29,7 @@ services:
       - spring.cloud.config.uri= http://config-server:8888
     depends_on:
       config-server:
-        condition: service_started
+        condition: service_healthy
     ports:
       - "8761:8761"
     networks:
