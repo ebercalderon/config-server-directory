@@ -15,38 +15,36 @@ spring:
   application:
     name: gateway
     cloud:
-      discovery:
-        enabled: true
-    gateway:
-      discovery:
-        locator:
-          enabled: true
-      routes:
-        - id: customer
-          uri: lb://customer
-          predicates:
-            - Path=/customer/**
-        - id: movement
-          uri: lb://movement
-          predicates:
-            - Path=/movement/**
-        - id: currentAccount
-          uri: lb://passive
-          predicates:
-            - Path=/currentAccount/**
-        - id: savingAccount
-          uri: lb://passive
-          predicates:
-            - Path=/savingAccount/**
-        - id: fixedTerm
-          uri: lb://passive
-          predicates:
-            - Path=/fixedTerm/**
-        - id: credit
-          uri: lb://credit
-          predicates:
-            - Path=/credits/**
-        - id: statusaccount
-          uri: lb://statusaccount
-          predicates:
-            - Path=/status/**
+      gateway:
+        discovery:
+          locator:
+            enabled: true
+        routes:
+          - id: customer
+            uri: lb://customer
+            predicates:
+              - Path=/customer/**
+          - id: movement
+            uri: lb://movement
+            predicates:
+              - Path=/movement/**
+          - id: currentAccount
+            uri: lb://passive
+            predicates:
+              - Path=/currentAccount/**
+          - id: savingAccount
+            uri: lb://passive
+            predicates:
+              - Path=/savingAccount/**
+          - id: fixedTerm
+            uri: lb://passive
+            predicates:
+              - Path=/fixedTerm/**
+          - id: credit
+            uri: lb://credit
+            predicates:
+              - Path=/credits/**
+          - id: statusaccount
+            uri: lb://statusaccount
+            predicates:
+              - Path=/status/**
