@@ -32,10 +32,3 @@ resilience4j.circuitbreaker:
       waitDurationInOpenState: 3s
       failureRateThreshold: 50
       eventConsumerBufferSize: 10
-
-spring-doc:
-  api-docs:
-    enabled: true
-    path: /api-docs
-swagger-ui:
-  path: swagger-ui-custom.html

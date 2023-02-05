@@ -46,7 +46,10 @@ spring:
           uri: lb://credit
           predicates:
             - Path=/credits/**
-        - id: statusaccount
-          uri: lb://statusaccount
-          predicates:
-            - Path=/status/**
+
+spring-doc:
+  swagger-ui:
+    urls:
+      - name: customer
+        url: /customer/api-docs/
+      - name: passive
