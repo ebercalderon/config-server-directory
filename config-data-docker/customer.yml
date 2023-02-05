@@ -10,12 +10,6 @@ spring:
   data:
     mongodb:
       uri: mongodb+srv://dev:az9Y7tr5eGTgHzVF@nttdata.tipkdvn.mongodb.net/bootcamp?retryWrites=true&w=majority
-  cloud:
-    config:
-      server:
-        git:
-          default-label: main
-          uri: https://github.com/ecalderc/customer-microservice
 
 eureka:
   client:
@@ -24,6 +18,8 @@ eureka:
     service-url:
       defaultZone: http://eureka-server:8761/eureka/
     prefer-ip-address: true
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 
 resilience4j.circuitbreaker:
   instances:

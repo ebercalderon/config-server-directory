@@ -14,12 +14,6 @@ eureka:
 spring:
   application:
     name: gateway
-  cloud:
-    config:
-      server:
-        git:
-          default-label: main
-          uri: https://github.com/ecalderc/gateway
     gateway:
       discovery:
         locator:

@@ -10,12 +10,6 @@ spring:
   data:
     mongodb:
       uri: mongodb+srv://dev:az9Y7tr5eGTgHzVF@nttdata.tipkdvn.mongodb.net/bootcamp?retryWrites=true&w=majority
-  cloud:
-    config:
-      server:
-        git:
-          default-label: main
-          uri: https://github.com/ecalderc/customer-microservice
 
 eureka:
   instance:
@@ -38,3 +32,10 @@ resilience4j.circuitbreaker:
       waitDurationInOpenState: 3s
       failureRateThreshold: 50
       eventConsumerBufferSize: 10
+
+spring-doc:
+  api-docs:
+    enabled: true
+    path: /api-docs
+swagger-ui:
+  path: swagger-ui-custom.html

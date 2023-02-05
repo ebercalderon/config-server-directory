@@ -20,7 +20,7 @@ services:
         context: ../eureka-server
     image: eureka-server
     environment:
-      - spring.cloud.config.profile= docker
+      - spring.profiles.active= docker
       - spring.cloud.config.uri= http://config-server:8888
     depends_on:
       config-server:
@@ -36,7 +36,7 @@ services:
         context: ../gateway
     image: gateway
     environment:
-      - spring.cloud.config.profile= docker
+      - spring.profiles.active= docker
       - spring.cloud.config.uri= http://config-server:8888
       - eureka.client.serviceUrl.defaultZone=http://config-server:8761/eureka
     depends_on:
@@ -53,7 +53,7 @@ services:
         context: ../customer-microservice
     image: customer-microservice
     environment:
-      - spring.cloud.config.profile= docker
+      - spring.profiles.active= docker
       - spring.cloud.config.uri= http://config-server:8888
       - eureka.client.serviceUrl.defaultZone=http://config-server:8761/eureka
     depends_on:
@@ -72,7 +72,7 @@ services:
         context: ../movement-microservice
     image: movement-microservice
     environment:
-      - spring.cloud.config.profile= docker
+      - spring.profiles.active= docker
       - spring.cloud.config.uri= http://config-server:8888
       - eureka.client.serviceUrl.defaultZone=http://config-server:8761/eureka
     depends_on:
@@ -89,7 +89,7 @@ services:
         context: ../passive-microservice
     image: passive-microservice
     environment:
-      - spring.cloud.config.profile= docker
+      - spring.profiles.active= docker
       - spring.cloud.config.uri= http://config-server:8888
       - eureka.client.serviceUrl.defaultZone=http://config-server:8761/eureka
     depends_on:
