@@ -19,15 +19,23 @@ fi
 
 read -p "Do you want to generate the jar files? (Y/N) " answer
 if [ "$answer" == "Y" ] || [ "$answer" == "y" ]; then
-  # Compile JARs for each microservice
+  # Compile JARs for each microservice in parallel
   for microservice in "${microservices[@]}"; do
-    cd $microservice
-    mvn clean install
-    cd ..
+    (
+      cd $microservice
+      mvn clean install
+    ) &
   done
+
+  wait
 
   # Start the Docker containers
   docker-compose up --build
+
+  end_time=$(date +%s)
+  total_time=$((end_time - start_time))
+
+  echo "Total time taken: $total_time seconds."
 else
   echo "Exiting without generating jar files."
 fi
