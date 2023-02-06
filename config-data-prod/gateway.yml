@@ -9,7 +9,7 @@ eureka:
       defaultZone: https://eureka-server-ecalderc.azurewebsites.net/eureka
     prefer-ip-address: true
   instance:
-    instance-id: localhost
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 
 spring:
   application:
@@ -26,6 +26,8 @@ spring:
           uri: lb://customer
           predicates:
             - Path=/customer/**
+          filters:
+            - RewritePath=/customer/(?<path>.*), /$\{path}
         - id: movement
           uri: lb://movement
           predicates:
