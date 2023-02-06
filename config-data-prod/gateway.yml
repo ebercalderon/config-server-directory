@@ -21,6 +21,9 @@ spring:
       discovery:
         locator:
           enabled: true
+      dns:
+        ip-address:
+          enabled: true
       routes:
         - id: customer
           uri: lb://customer
