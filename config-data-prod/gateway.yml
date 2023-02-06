@@ -23,7 +23,7 @@ spring:
           enabled: true
       routes:
         - id: customer
-          uri: https://customer-microservice-ecalderc.azurewebsites.net
+          uri: lb://customer
           predicates:
             - Path=/customer/**
         - id: movement
