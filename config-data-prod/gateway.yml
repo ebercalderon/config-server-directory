@@ -9,7 +9,7 @@ eureka:
       defaultZone: https://eureka-server-ecalderc.azurewebsites.net/eureka
     prefer-ip-address: true
   instance:
-    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    instance-id: localhost
 
 spring:
   application:
