@@ -6,7 +6,7 @@ spring:
     name: passive
   data:
     mongodb:
-      uri: mongodb+srv://dev:az9Y7tr5eGTgHzVF@nttdata.tipkdvn.mongodb.net/bootcamp?retryWrites=true&w=majority
+      uri: mongodb+srv://ecalderc:az9Y7tr5eGTgHzVF@bootcamp.yi8qeh1.mongodb.net/?retryWrites=true&w=majority
 
 eureka:
   instance:
