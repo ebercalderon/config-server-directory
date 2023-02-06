@@ -21,9 +21,14 @@ spring:
       discovery:
         locator:
           enabled: true
-      dns:
-        ip-address:
-          enabled: true
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
       routes:
         - id: customer
           uri: lb://customer
