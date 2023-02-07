@@ -7,7 +7,7 @@ spring:
   data:
     mongodb:
       uri: mongodb+srv://ecalderc:az9Y7tr5eGTgHzVF@bootcamp.yi8qeh1.mongodb.net/?retryWrites=true&w=majority
-      database: dbBC40Customer
+      database: dbBC40Wallet
 
 eureka:
   client:
