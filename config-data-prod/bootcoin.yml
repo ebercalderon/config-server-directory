@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: customer
+    name: bootcoin
   data:
     mongodb:
       uri: mongodb+srv://ecalderc:az9Y7tr5eGTgHzVF@bootcamp.yi8qeh1.mongodb.net/?retryWrites=true&w=majority
