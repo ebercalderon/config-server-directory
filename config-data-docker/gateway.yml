@@ -46,6 +46,10 @@ spring:
           uri: lb://credit
           predicates:
             - Path=/credits/**
+        - id: bootcoin
+          uri: lb://bootcoin
+          predicates:
+            - Path=/bootcoin/**
 
 spring-doc:
   swagger-ui:
